@@ -22,7 +22,10 @@ const Peer = window.Peer;
   localStream = await navigator.mediaDevices
     .getUserMedia({
       audio: true,
-      video: true,
+      video: {
+        width: { exact: 1920 },
+        height: { exact: 1080 }
+    },
     })
   }
 
@@ -80,7 +83,7 @@ const Peer = window.Peer;
     dataConnection.once('close', () => {
       messages.textContent += `=== DataConnection has been closed ===\n`;
       sendTrigger.removeEventListener('click', onClickSend);
-      
+
     });
 
     function onClickSend() {
