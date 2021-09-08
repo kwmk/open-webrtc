@@ -1,4 +1,4 @@
-API_KEY = "e316eaa7-4c1c-468c-b23a-9ce51b074ab7";
+API_KEY = "203f5305-32a5-4cbd-8754-945eb904fbbf";
 const username = window.prompt("Please input user name", "")
 const localvideo_type = window.confirm("Is it okay to use the camera? \n If this answer is No, use schreen sharing");
 
