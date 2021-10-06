@@ -4,7 +4,7 @@ IMG.displayed {
     margin-right: auto }
 
 body {
-    background-image: url("./images/main.jpg");
+    /* background-image: url("./images/main.jpg"); */
     background-color:rgba(255,255,255,0.5);
     background-blend-mode:lighten;
 }
@@ -24,7 +24,7 @@ th {
 
 .split{
     display: table;
-    width: 100%;    
+    width: 100%;
 }
 .split-item{
     display: table-cell;
