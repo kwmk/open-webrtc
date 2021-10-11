@@ -15,14 +15,16 @@
 
 <body>
     <h1>配信側</h1>
+    <h1>PC, スマホ共にChromeでのみ動きます</h1>
     <div class="container">
         <div class="local-stream">
-            カメラ選択<select id="device"></select>
+            カメラ選択<select id="device"></select><br>
+            ※スマホの方は画面を回転させてカメラを横長にしてくれると助かります<br>
             <video id="js-local-stream" width="480" height="320"></video>
         </div>
         <div class="peer-data">
             <p>Your ID: <span id="local-id"></span></p>
-            <p>Connection Status: <span id="status"></span></p>
+            <p>Connection Status: <span id="status">工事中</span></p>
         </div>
     </div>
 </body>
