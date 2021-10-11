@@ -9,6 +9,8 @@
         integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
     <link rel="stylesheet" href="listener.css">
     <script src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="getStats.js" defer></script>
     <script src="listener.js" defer></script>
 </head>
 
@@ -23,6 +25,36 @@
             <input type="text" placeholder="Remote Peer ID" id="js-remote-id">
             <button id="js-call-trigger" class="btn btn-primary disabled">Call</button>
             <button id="js-close-trigger" class="btn btn-danger disabled">Close</button>
+            <div id="stats">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Local Candidate</td>
+                            <td id=local-candidate></td>
+                        </tr>
+                        <tr>
+                            <td>Remote Candidate</td>
+                            <td id=remote-candidate></td>
+                        </tr>
+                        <tr>
+                            <td>Inbound Codec</td>
+                            <td id=inbound-codec></td>
+                        </tr>
+                        <!-- <tr>
+                            <td>Inbound Audio</td>
+                            <td id=inbound-audio></td>
+                        </tr> -->
+                        <tr>
+                            <td>Inbound Video</td>
+                            <td id=inbound-video></td>
+                        </tr>
+                        <tr>
+                            <td>Remote Audio/Video Track</td>
+                            <td id=remote-video></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

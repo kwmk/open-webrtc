@@ -43,4 +43,13 @@ const Peer = window.Peer;
   });
 
   peer.on('error', console.error);
+
+  let stats;
+  async function showStatus() {
+    if (mediaConnection && mediaConnection.open) {
+      stats = await mediaConnection.getPeerConnection().getStats()
+      getRTCStats(stats);
+    }
+  }
+  setInterval(showStatus, 1000);
 })();
