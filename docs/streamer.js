@@ -31,21 +31,23 @@ const Peer = window.Peer;
     let optionElm = document.createElement('option');
     optionElm.id = device.deviceId;
     optionElm.innerText = device.label;
-    optionElm.value = device.label;
+    optionElm.value = device.deviceId;
     selectElm.appendChild(optionElm);
   });
 
-  changeCameraBtn.addEventListener('click', async () => {
+  async function changeCamera() {
     localStream = await navigator.mediaDevices.getUserMedia({
       video: {
-        deviceId: selectElm.options[selectElm.selectedIndex].value
+        deviceId: selectElm.value
       }
     });
     localVideo.muted = true;
     localVideo.srcObject = localStream;
     localVideo.playsInline = true;
     await localVideo.play().catch(console.error);
-  });
+  }
+
+  selectElm.onchange = changeCamera;
 
   localVideo.muted = true;
   localVideo.srcObject = localStream;
