@@ -8,6 +8,8 @@ const Peer = window.Peer;
   const localVideo = document.getElementById('js-local-stream');
   const localIdElm = document.getElementById('local-id');
   const statusElm = document.getElementById('status');
+  const selectElm = document.getElementById('device');
+  const changeCameraBtn = document.getElementById('change-device');
 
   let localStream;
   if (usesCamera) {
@@ -22,6 +24,28 @@ const Peer = window.Peer;
   } else {
     localStream = await navigator.mediaDevices.getDisplayMedia();
   }
+
+  const devices = await navigator.mediaDevices.enumerateDevices();
+  const videoDevices = devices.filter(device => device.kind === 'videoinput');
+  videoDevices.map(device => {
+    let optionElm = document.createElement('option');
+    optionElm.id = device.deviceId;
+    optionElm.innerText = device.label;
+    optionElm.value = device.label;
+    selectElm.appendChild(optionElm);
+  });
+
+  changeCameraBtn.addEventListener('click', async () => {
+    localStream = await navigator.mediaDevices.getUserMedia({
+      video: {
+        deviceId: selectElm.options[selectElm.selectedIndex].value
+      }
+    });
+    localVideo.muted = true;
+    localVideo.srcObject = localStream;
+    localVideo.playsInline = true;
+    await localVideo.play().catch(console.error);
+  });
 
   localVideo.muted = true;
   localVideo.srcObject = localStream;
@@ -39,5 +63,5 @@ const Peer = window.Peer;
     mediaConnection.answer(localStream);
   });
 
-   peer.on('error', console.error);
+  peer.on('error', console.error);
 })();
