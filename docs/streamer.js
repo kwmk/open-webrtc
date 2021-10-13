@@ -12,11 +12,6 @@ const Peer = window.Peer;
   const changeCameraBtn = document.getElementById('change-device');
 
   let localStream;
-  if (usesCamera) {
-    changeCamera();
-  } else {
-    localStream = await navigator.mediaDevices.getDisplayMedia();
-  }
 
   const devices = await navigator.mediaDevices.enumerateDevices();
   const videoDevices = devices.filter(device => device.kind === 'videoinput');
@@ -27,6 +22,14 @@ const Peer = window.Peer;
     selectElm.appendChild(optionElm);
   });
 
+  async function gotStream(stream) {
+    localStream = stream;
+    localVideo.muted = true;
+    localVideo.srcObject = stream;
+    localVideo.playsInline = true;
+    await localVideo.play().catch(console.error);
+  }
+
   async function changeCamera() {
     const videoSource = selectElm.value;
     const constraints = {
@@ -36,17 +39,13 @@ const Peer = window.Peer;
     gotStream(localStream);
   }
 
-  async function gotStream(stream) {
-    localStream = stream;
-    localVideo.muted = true;
-    localVideo.srcObject = stream;
-    localVideo.playsInline = true;
-    await localVideo.play().catch(console.error);
-  }
-
   selectElm.onchange = changeCamera;
 
-  gotStream(localStream);
+  if (usesCamera) {
+    changeCamera();
+  } else {
+    localStream = await navigator.mediaDevices.getDisplayMedia();
+  }
 
   const peer = (window.peer = new Peer(username, {
     key: API_KEY,
