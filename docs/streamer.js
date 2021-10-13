@@ -41,18 +41,20 @@ const Peer = window.Peer;
         deviceId: selectElm.value
       }
     });
+    gotStream(localStream);
+  }
+
+  async function gotStream(stream) {
+    localStream = stream;
     localVideo.muted = true;
-    localVideo.srcObject = localStream;
+    localVideo.srcObject = stream;
     localVideo.playsInline = true;
     await localVideo.play().catch(console.error);
   }
 
   selectElm.onchange = changeCamera;
 
-  localVideo.muted = true;
-  localVideo.srcObject = localStream;
-  localVideo.playsInline = true;
-  await localVideo.play().catch(console.error);
+  gotStream(localStream);
 
   const peer = (window.peer = new Peer(username, {
     key: API_KEY,
