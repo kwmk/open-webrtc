@@ -13,14 +13,7 @@ const Peer = window.Peer;
 
   let localStream;
   if (usesCamera) {
-    localStream = await navigator.mediaDevices
-      .getUserMedia({
-        audio: true,
-        video: {
-          width: { ideal: 1920 },
-          height: { ideal: 1080 }
-        },
-      })
+    changeCamera();
   } else {
     localStream = await navigator.mediaDevices.getDisplayMedia();
   }
@@ -29,18 +22,17 @@ const Peer = window.Peer;
   const videoDevices = devices.filter(device => device.kind === 'videoinput');
   videoDevices.map(device => {
     let optionElm = document.createElement('option');
-    optionElm.id = device.deviceId;
     optionElm.innerText = device.label;
     optionElm.value = device.deviceId;
     selectElm.appendChild(optionElm);
   });
 
   async function changeCamera() {
-    localStream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        deviceId: selectElm.value
-      }
-    });
+    const videoSource = selectElm.value;
+    const constraints = {
+      video: { deviceId: videoSource ? { exact: videoSource } : undefined }
+    };
+    localStream = await navigator.mediaDevices.getUserMedia(constraints);
     gotStream(localStream);
   }
 
