@@ -1,4 +1,4 @@
-function getRTCStats(stats) {
+export function getRTCStats(stats) {
 
     let trasportArray = [];
     let candidateArray = [];

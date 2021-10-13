@@ -1,6 +1,8 @@
-API_KEY = "203f5305-32a5-4cbd-8754-945eb904fbbf";
+const API_KEY = "203f5305-32a5-4cbd-8754-945eb904fbbf";
 
 const Peer = window.Peer;
+
+import { getRTCStats } from './getStats.js';
 
 (async function main() {
   const localIdElm = document.getElementById('js-local-id');
