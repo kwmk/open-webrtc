@@ -34,6 +34,7 @@ const Peer = window.Peer;
   }
 
   async function changeCamera() {
+    // このifが無いとXZ1とかではカメラを切り替えられなくなる
     if (localStream) {
       localStream.getTracks().forEach(track => {
         track.stop();
