@@ -2,60 +2,60 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>監視側</title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-    <link rel="stylesheet" href="listener.css">
-    <script src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="listener.js" type="module" defer></script>
+  <meta charset="UTF-8">
+  <title>監視側</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+  <link rel="stylesheet" href="listener.css">
+  <script src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="listener.js" type="module" defer></script>
 </head>
 
 <body>
-    <h1>監視側</h1>
-    <div class="container">
-        <div class="remote-stream">
-            <video controls id="js-remote-stream" width="480" height="320"></video>
-        </div>
-        <div class="peer-data">
-            <p>Your ID: <span id="js-local-id"></span></p>
-            <input type="text" placeholder="Remote Peer ID" id="js-remote-id">
-            <button id="js-call-trigger" class="btn btn-primary disabled">Call</button>
-            <button id="js-close-trigger" class="btn btn-danger disabled">Close</button>
-            <div id="stats">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>Local Candidate</td>
-                            <td id=local-candidate></td>
-                        </tr>
-                        <tr>
-                            <td>Remote Candidate</td>
-                            <td id=remote-candidate></td>
-                        </tr>
-                        <tr>
-                            <td>Inbound Codec</td>
-                            <td id=inbound-codec></td>
-                        </tr>
-                        <!-- <tr>
+  <div class="video-wrapper">
+    <div class="fullscreen">
+      <video controls id="js-remote-stream" width="480" height="320"></video>
+      <div class="peer-data">
+        <p>Your ID: <span id="js-local-id"></span></p>
+        <input type="text" placeholder="Remote Peer ID" id="js-remote-id">
+        <button id="js-call-trigger" class="btn btn-primary disabled">Call</button>
+        <button id="js-close-trigger" class="btn btn-danger disabled">Close</button>
+        <div id="stats">
+          <div id="time"></div>
+          <table>
+            <tbody>
+              <tr>
+                <td>Local Candidate</td>
+                <td id=local-candidate></td>
+              </tr>
+              <tr>
+                <td>Remote Candidate</td>
+                <td id=remote-candidate></td>
+              </tr>
+              <tr>
+                <td>Inbound Codec</td>
+                <td id=inbound-codec></td>
+              </tr>
+              <!-- <tr>
                             <td>Inbound Audio</td>
                             <td id=inbound-audio></td>
                         </tr> -->
-                        <tr>
-                            <td>Inbound Video</td>
-                            <td id=inbound-video></td>
-                        </tr>
-                        <tr>
-                            <td>Video Track</td>
-                            <td id=remote-video></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+              <tr>
+                <td>Inbound Video</td>
+                <td id=inbound-video></td>
+              </tr>
+              <tr>
+                <td>Video Track</td>
+                <td id=remote-video></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
+  </div>
 </body>
 
 </html>

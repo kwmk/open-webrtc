@@ -3,6 +3,7 @@ const API_KEY = "203f5305-32a5-4cbd-8754-945eb904fbbf";
 const Peer = window.Peer;
 
 import { getRTCStats } from './getStats.js';
+import { getTime } from './utils.js';
 
 (async function main() {
   const localIdElm = document.getElementById('js-local-id');
@@ -55,3 +56,8 @@ import { getRTCStats } from './getStats.js';
   }
   setInterval(showStatus, 1000);
 })();
+
+function showTime() {
+  document.getElementById("time").innerText = getTime();
+}
+setInterval(showTime, 1000);
