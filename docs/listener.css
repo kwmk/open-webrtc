@@ -22,10 +22,19 @@ video {
   z-index: -1;
 }
 
+input {
+  background-color: black;
+  color: white;
+}
+
 .peer-data {
   position: absolute;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
+}
+
+td {
+  padding: 0 0.5rem;
 }
