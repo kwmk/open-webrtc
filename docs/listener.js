@@ -61,3 +61,9 @@ function showTime() {
   document.getElementById("time").innerText = getTime();
 }
 setInterval(showTime, 1000);
+
+document.body.addEventListener('keydown', event => {
+  if (event.key === 'h') {
+    document.getElementById('peer-data').classList.toggle('hidden');
+  }
+});

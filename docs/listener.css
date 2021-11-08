@@ -35,6 +35,10 @@ input {
   color: white;
 }
 
+.hidden {
+  display: none;
+}
+
 td {
   padding: 0 0.5rem;
 }
