@@ -129,4 +129,9 @@ export function getRTCStats(stats) {
     $('#inbound-video').html('bytesReceived(MB):' + (inboundRTPVideoStreamArray[0].bytesReceived / (1024 ** 2)).toFixed(1) + '<BR>fractionLost:' + inboundRTPVideoStreamArray[0].fractionLost);
 
     $('#remote-video').html('<BR>frameHeight:' + mediaStreamTrack_remote_videoArray[0].frameHeight + '<BR>frameWidth:' + mediaStreamTrack_remote_videoArray[0].frameWidth);
+
+    let fps = inboundRTPVideoStreamArray[0].framesPerSecond;
+    let height = mediaStreamTrack_remote_videoArray[0].frameHeight;
+    let width = mediaStreamTrack_remote_videoArray[0].frameWidth;
+    document.getElementById("fps-res").innerText = `${fps}fps ${height}x${width}`;
 }
