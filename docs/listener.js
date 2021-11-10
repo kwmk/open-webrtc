@@ -11,6 +11,7 @@ const closeTrigger = document.getElementById('js-close-trigger');
 const heightButton = document.getElementById('height-button');
 const remoteVideo = document.getElementById('js-remote-stream');
 const remoteIdElm = document.getElementById('js-remote-id');
+const heightElm = document.getElementById('height-input');
 
 const peer = (window.peer = new Peer({
   key: API_KEY,
@@ -54,7 +55,7 @@ closeTrigger.addEventListener('click', () => {
 });
 
 heightButton.addEventListener('click', () => {
-  let height = document.getElementById('height-input').value;
+  let height = heightElm.value;
   dataConnection.send(height);
 });
 
@@ -78,4 +79,18 @@ document.body.addEventListener('keydown', event => {
   if (event.key === 'h') {
     document.getElementById('peer-data').classList.toggle('hidden');
   }
+});
+
+remoteIdElm.addEventListener('keydown', event => {
+  if (event.key === "Enter") {
+    callTrigger.click();
+  }
+  event.stopPropagation();
+});
+
+heightElm.addEventListener('keydown', event => {
+  if (event.key === "Enter") {
+    heightButton.click();
+  }
+  event.stopPropagation();
 });
