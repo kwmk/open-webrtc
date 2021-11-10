@@ -15,6 +15,7 @@ const Peer = window.Peer;
   const selectElm = document.getElementById('device');
 
   let localStream;
+  let videoHeight = 720;
 
   const devices = await navigator.mediaDevices.enumerateDevices();
   const videoDevices = devices.filter(device => device.kind === 'videoinput');
@@ -33,7 +34,7 @@ const Peer = window.Peer;
     await localVideo.play().catch(console.error);
   }
 
-  async function changeCamera() {
+  async function changeCamera(videoHeight) {
     // このifが無いとXZ1とかではカメラを切り替えられなくなる
     if (localStream) {
       localStream.getTracks().forEach(track => {
@@ -42,13 +43,16 @@ const Peer = window.Peer;
     }
     const videoSource = selectElm.value;
     const constraints = {
-      video: { deviceId: videoSource ? { exact: videoSource } : undefined }
+      video: {
+        deviceId: videoSource ? { exact: videoSource } : undefined,
+        height: videoHeight
+      }
     };
     localStream = await navigator.mediaDevices.getUserMedia(constraints);
     gotStream(localStream);
   }
 
-  selectElm.onchange = changeCamera;
+  selectElm.onchange = changeCamera(videoHeight);
 
   if (usesCamera) {
     changeCamera();
@@ -56,6 +60,7 @@ const Peer = window.Peer;
     localStream = await navigator.mediaDevices.getDisplayMedia();
   }
 
+  let mediaConnection;
   let dataConnection;
 
   const peer = (window.peer = new Peer(username, {
@@ -65,12 +70,14 @@ const Peer = window.Peer;
 
   peer.on('open', id => (localIdElm.textContent = id));
 
-  peer.on('call', mediaConnection => {
+  peer.on('call', call => {
+    mediaConnection = call;
     mediaConnection.answer(localStream);
   });
 
-  function onData(data) {
-    console.log(data);
+  async function onData(data) {
+    await changeCamera(Number(data));
+    mediaConnection.replaceStream(localStream);
   }
 
   peer.on('connection', conn => {
