@@ -9,6 +9,7 @@ import { getTime } from './utils.js';
   const localIdElm = document.getElementById('js-local-id');
   const callTrigger = document.getElementById('js-call-trigger');
   const closeTrigger = document.getElementById('js-close-trigger');
+  const heightButton = document.getElementById('height-button');
   const remoteVideo = document.getElementById('js-remote-stream');
   const remoteIdElm = document.getElementById('js-remote-id');
 
@@ -43,6 +44,10 @@ import { getTime } from './utils.js';
 
   closeTrigger.addEventListener('click', () => {
     mediaConnection.close(true)
+  });
+
+  heightButton.addEventListener('click', () => {
+    let height = document.getElementById('height-input').value;
   });
 
   peer.on('error', console.error);
