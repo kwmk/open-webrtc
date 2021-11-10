@@ -56,6 +56,8 @@ const Peer = window.Peer;
     localStream = await navigator.mediaDevices.getDisplayMedia();
   }
 
+  let dataConnection;
+
   const peer = (window.peer = new Peer(username, {
     key: API_KEY,
     debug: 3,
@@ -65,6 +67,15 @@ const Peer = window.Peer;
 
   peer.on('call', mediaConnection => {
     mediaConnection.answer(localStream);
+  });
+
+  function onData(data) {
+    console.log(data);
+  }
+
+  peer.on('connection', conn => {
+    dataConnection = conn;
+    dataConnection.on('data', onData);
   });
 
   peer.on('error', console.error);

@@ -55,6 +55,7 @@ closeTrigger.addEventListener('click', () => {
 
 heightButton.addEventListener('click', () => {
   let height = document.getElementById('height-input').value;
+  dataConnection.send(height);
 });
 
 peer.on('error', console.error);
