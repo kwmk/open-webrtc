@@ -34,7 +34,7 @@ const Peer = window.Peer;
     await localVideo.play().catch(console.error);
   }
 
-  async function changeCamera(videoHeight) {
+  async function changeCamera() {
     // このifが無いとXZ1とかではカメラを切り替えられなくなる
     if (localStream) {
       localStream.getTracks().forEach(track => {
@@ -52,7 +52,7 @@ const Peer = window.Peer;
     gotStream(localStream);
   }
 
-  selectElm.onchange = changeCamera(videoHeight);
+  selectElm.onchange = changeCamera;
 
   if (usesCamera) {
     changeCamera();
@@ -76,7 +76,8 @@ const Peer = window.Peer;
   });
 
   async function onData(data) {
-    await changeCamera(Number(data));
+    videoHeight = Number(data);
+    await changeCamera();
     mediaConnection.replaceStream(localStream);
   }
 
