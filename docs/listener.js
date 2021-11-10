@@ -23,6 +23,7 @@ peer.on('open', (id) => {
 });
 
 let mediaConnection;
+let dataConnection;
 // Register caller handler
 
 async function onStream(stream) {
@@ -42,12 +43,14 @@ callTrigger.addEventListener('click', () => {
   mediaConnection = peer.call(remoteIdElm.value);
   mediaConnection.on('stream', onStream);
   mediaConnection.on('close', onCloseMedia);
+  dataConnection = peer.connect(remoteIdElm.value);
 });
 
 closeTrigger.addEventListener('click', () => {
   mediaConnection.off('stream', onStream);
   mediaConnection.off('close', onCloseMedia);
-  mediaConnection.close(true)
+  mediaConnection.close(true);
+  dataConnection.close(true);
 });
 
 heightButton.addEventListener('click', () => {
