@@ -24,24 +24,29 @@ peer.on('open', (id) => {
 
 let mediaConnection;
 // Register caller handler
+
+async function onStream(stream) {
+  remoteVideo.srcObject = stream;
+  remoteVideo.playsInline = true;
+  await remoteVideo.play().catch(console.error);
+  closeTrigger.classList.remove('disabled');
+}
+
+function onCloseMedia() {
+  remoteVideo.srcObject.getTracks().forEach(track => track.stop());
+  remoteVideo.srcObject = null;
+  closeTrigger.classList.add('disabled');
+}
+
 callTrigger.addEventListener('click', () => {
   mediaConnection = peer.call(remoteIdElm.value);
-
-  mediaConnection.on('stream', async stream => {
-    remoteVideo.srcObject = stream;
-    remoteVideo.playsInline = true;
-    await remoteVideo.play().catch(console.error);
-    closeTrigger.classList.remove('disabled');
-  });
-
-  mediaConnection.on('close', () => {
-    remoteVideo.srcObject.getTracks().forEach(track => track.stop());
-    remoteVideo.srcObject = null;
-    closeTrigger.classList.add('disabled');
-  });
+  mediaConnection.on('stream', onStream);
+  mediaConnection.on('close', onCloseMedia);
 });
 
 closeTrigger.addEventListener('click', () => {
+  mediaConnection.off('stream', onStream);
+  mediaConnection.off('close', onCloseMedia);
   mediaConnection.close(true)
 });
 
