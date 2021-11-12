@@ -16,14 +16,15 @@
 <body>
   <div class="video-wrapper">
     <div class="fullscreen">
-      <video id="js-remote-stream" width="480" height="320"></video>
+      <div class="vebots-background"></div>
+      <video id="js-remote-stream"></video>
       <div class="peer-data" id="peer-data">
         <p>Your ID: <span id="js-local-id"></span></p>
         <input type="text" placeholder="Remote Peer ID" id="js-remote-id"><br>
         <button id="js-call-trigger" class="btn btn-primary disabled">Call</button>
         <button id="js-close-trigger" class="btn btn-secondary disabled">Close</button><br><br>
-        <input type="text" value="720" id="height-input"><br>
-        <button id="height-button" class="btn btn-dark">Set Height(px)</button>
+        <input type="text" value="720" id="height-input">px<br>
+        <button id="height-button" class="btn btn-dark">Set Ideal Height</button>
         <div id="stats">
           <div id="time"></div>
           <div id="fps-res"></div>
