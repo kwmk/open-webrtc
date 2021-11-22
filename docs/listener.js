@@ -7,11 +7,11 @@ import { getTime } from './utils.js';
 
 const localIdElm = document.getElementById('js-local-id');
 const callTrigger = document.getElementById('js-call-trigger');
-const closeTrigger = document.getElementById('js-close-trigger');
 const heightButton = document.getElementById('height-button');
 const remoteVideo = document.getElementById('js-remote-stream');
 const remoteIdElm = document.getElementById('js-remote-id');
 const heightElm = document.getElementById('height-input');
+const statusElm = document.getElementById('media-connection-status');
 
 const peer = (window.peer = new Peer({
   key: API_KEY,
@@ -31,27 +31,20 @@ async function onStream(stream) {
   remoteVideo.srcObject = stream;
   remoteVideo.playsInline = true;
   await remoteVideo.play().catch(console.error);
-  closeTrigger.classList.remove('disabled');
 }
 
 function onCloseMedia() {
   remoteVideo.srcObject.getTracks().forEach(track => track.stop());
   remoteVideo.srcObject = null;
-  closeTrigger.classList.add('disabled');
 }
 
 callTrigger.addEventListener('click', () => {
   mediaConnection = peer.call(remoteIdElm.value);
+  mediaConnection.off('stream', onStream);
+  mediaConnection.off('close', onCloseMedia);
   mediaConnection.on('stream', onStream);
   mediaConnection.on('close', onCloseMedia);
   dataConnection = peer.connect(remoteIdElm.value);
-});
-
-closeTrigger.addEventListener('click', () => {
-  mediaConnection.off('stream', onStream);
-  mediaConnection.off('close', onCloseMedia);
-  mediaConnection.close(true);
-  dataConnection.close(true);
 });
 
 heightButton.addEventListener('click', () => {
@@ -61,11 +54,26 @@ heightButton.addEventListener('click', () => {
 
 peer.on('error', console.error);
 
+function is_undefined_fps() {
+  return document.getElementById("fps-res")
+    .innerText.indexOf('undefined') !== -1;
+}
+
 let stats;
 async function showStatus() {
-  if (mediaConnection && mediaConnection.open) {
+  if (mediaConnection && mediaConnection.open && !is_undefined_fps()) {
     stats = await mediaConnection.getPeerConnection().getStats()
     getRTCStats(stats);
+    statusElm.innerText = 'open';
+  } else if (mediaConnection && mediaConnection.open && is_undefined_fps()) {
+    stats = await mediaConnection.getPeerConnection().getStats()
+    getRTCStats(stats);
+    statusElm.innerText = 'try connecting(browser)';
+  } else if (mediaConnection) {
+    statusElm.innerText = 'try connecting(app)';
+    callTrigger.click();
+  } else {
+    statusElm.innerText = 'close';
   }
 }
 setInterval(showStatus, 1000);
