@@ -65,6 +65,7 @@ const Peer = window.Peer;
     changeCamera();
   } else {
     localStream = await navigator.mediaDevices.getDisplayMedia();
+    gotStream(localStream);
   }
 
   let mediaConnection;
