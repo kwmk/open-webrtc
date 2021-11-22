@@ -1,7 +1,44 @@
 // 参考
 // https://github.com/jellybeans511/open-webrtc
 // https://webrtc.github.io/samples/src/content/devices/input-output/
+// https://stackoverflow.com/questions/7042611/override-console-log-for-production
 
+var logger = document.getElementById('log');
+for (let i = 0; i < 5; i++) {
+  logger.appendChild(document.createElement('p'));
+}
+
+function showLogHtml(text, ...args) {
+  let oneLog = document.createElement('p');
+  oneLog.innerHTML = text.concat(...args) + '<br />';
+  if (logger.lastChild.innerHTML === oneLog.innerHTML) return;
+  logger.removeChild(logger.firstChild);
+  logger.appendChild(oneLog);
+}
+
+var console = (function (oldCons) {
+  return {
+    log: function (text, ...args) {
+      oldCons.log(text, ...args);
+      showLogHtml(text, ...args);
+    },
+    info: function (text, ...args) {
+      oldCons.info(text, ...args);
+      showLogHtml(text, ...args);
+    },
+    warn: function (text, ...args) {
+      oldCons.warn(text, ...args);
+      showLogHtml(text, ...args);
+    },
+    error: function (text, ...args) {
+      oldCons.error(text, ...args);
+      showLogHtml(text, ...args);
+    }
+  };
+}(window.console));
+
+//Then redefine the old console
+window.console = console;
 API_KEY = "203f5305-32a5-4cbd-8754-945eb904fbbf";
 const username = window.prompt("Please input your userID", "")
 const usesCamera = window.confirm("Do you use the camera? \n If you don't, we'll share your screen.");
