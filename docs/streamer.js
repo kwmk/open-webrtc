@@ -50,6 +50,9 @@ const Peer = window.Peer;
     };
     localStream = await navigator.mediaDevices.getUserMedia(constraints);
     gotStream(localStream);
+    if (mediaConnection && mediaConnection.open) {
+      mediaConnection.close(true);
+    }
   }
 
   selectElm.onchange = changeCamera;
