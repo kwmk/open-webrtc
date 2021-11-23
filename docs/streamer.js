@@ -10,7 +10,10 @@ for (let i = 0; i < 5; i++) {
 
 function showLogHtml(text, ...args) {
   let oneLog = document.createElement('p');
-  oneLog.innerHTML = text.concat(...args) + '<br />';
+  string_args = args.map(arg => {
+      return JSON.stringify(arg);
+  });
+  oneLog.innerHTML = text.concat(...string_args) + '<br />';
   if (logger.lastChild.innerHTML === oneLog.innerHTML) return;
   logger.removeChild(logger.firstChild);
   logger.appendChild(oneLog);
