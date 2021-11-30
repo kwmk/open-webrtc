@@ -45,6 +45,9 @@ callTrigger.addEventListener('click', () => {
   mediaConnection.on('stream', onStream);
   mediaConnection.on('close', onCloseMedia);
   dataConnection = peer.connect(remoteIdElm.value);
+  setTimeout(() => {
+    heightButton.click();
+  }, 2000);
 });
 
 heightButton.addEventListener('click', () => {
