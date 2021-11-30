@@ -1,6 +1,6 @@
 # open-webrtc
 
-WebRTCで遠隔監視
+[jellybeans511/open-webrtc: Don't abuse...](https://github.com/jellybeans511/open-webrtc)から生まれた WebRTC で遠隔監視 Web アプリ。Don't abuse too。
 
 ## リンク
 
