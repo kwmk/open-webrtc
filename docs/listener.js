@@ -105,3 +105,12 @@ heightElm.addEventListener('keydown', event => {
   }
   event.stopPropagation();
 });
+
+let timer;
+window.addEventListener('mousemove', function () {
+  document.body.classList.remove("cursor-hide");
+  clearTimeout(timer);
+  timer = setTimeout(function () {
+    document.body.classList.add("cursor-hide");
+  }, 1000);
+});

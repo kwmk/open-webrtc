@@ -4,6 +4,9 @@ body {
   background-color: black;
 }
 
+.cursor-hide {
+  cursor: none;
+}
 .video-wrapper {
   position: relative;
 }
