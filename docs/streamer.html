@@ -2,31 +2,31 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>配信側</title>
-    <IMG class="displayed" link rel="shortcut icon" href="/images/sad.jpg">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-    <link rel="stylesheet" href="streamer.css">
-    <script src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
-    <script src="streamer.js" defer></script>
+  <meta charset="UTF-8">
+  <title>配信側</title>
+  <IMG class="displayed" link rel="shortcut icon" href="/images/sad.jpg">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+  <link rel="stylesheet" href="streamer.css">
+  <script src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+  <script src="streamer.js" defer></script>
 </head>
 
 <body>
-    <h1>配信側</h1>
-    <h1>PC, スマホ共にChrome推奨</h1>
-    <div class="container">
-        <div class="local-stream">
-            カメラ選択<select id="device"></select><br>
-            ※スマホの方は画面を回転させてカメラを横長にしてくれると助かります<br>
-            <video id="js-local-stream" width="480" height="320"></video>
-        </div>
-        <div class="peer-data">
-            <p>Your ID: <span id="local-id"></span></p>
-            <p>last 5 log: <span id="log"></span></p>
-        </div>
+  <h1>配信側</h1>
+  <h1>PC, スマホ共にChrome推奨</h1>
+  <div class="container">
+    <div class="local-stream">
+      カメラ選択<select id="device"></select><br>
+      ※スマホの方は画面を回転させてカメラを横長にしてくれると助かります<br>
+      <video id="js-local-stream" width="480" height="320"></video>
     </div>
+    <div class="peer-data">
+      <p>Your ID: <span id="local-id"></span></p>
+      <p>last 5 log: <span id="log"></span></p>
+    </div>
+  </div>
 </body>
 
 </html>
