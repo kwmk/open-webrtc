@@ -1,3 +1,4 @@
+# open-webrtcは[kwmk/open-webrtcr](https://github.com/kwmk/open-webrtcr)に移動しました。
 # open-webrtc
 
 [jellybeans511/open-webrtc: Don't abuse...](https://github.com/jellybeans511/open-webrtc)から生まれた WebRTC で遠隔監視 Web アプリ。Don't abuse too。
